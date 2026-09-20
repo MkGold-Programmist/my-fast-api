@@ -4,7 +4,7 @@ from jose import jwt
 import os
 
 # Сначала проверяет переменную окружения на Render, а если её нет (например, локально) — использует дефолтную строку
-SECRET_KEY = os.getenv("SECRET_KEY", "SUPER_SECRET_KEY_CHANGE_ME_IN_PRODUCTION")
+SECRET_KEY = os.getenv("SECRET_KEY", "SUPER_SECRET_KEY_CHANGE_ME_IN_PRODUCTION")z
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 60
 
