@@ -1,16 +1,15 @@
 from pydantic import BaseModel, EmailStr, Field
 
-# Схема для регистрации пользователя
 class UserCreate(BaseModel):
     username: str = Field(
         ...,
         description="Уникальное имя пользователя",
-        example="Narzullo"
+        example="invalid"
     )
     email: EmailStr = Field(
         ...,
         description="Действительный адрес электронной почты",
-        example="user@example.com"
+        example="invalid@example.com"
     )
     password: str = Field(
         ...,
@@ -19,17 +18,15 @@ class UserCreate(BaseModel):
         example="secret_password123"
     )
 
-# Схема ответа с данными пользователя
 class UserResponse(BaseModel):
     id: int = Field(..., description="Уникальный идентификатор пользователя", example=1)
-    username: str = Field(..., description="Имя пользователя", example="Narzullo")
-    email: str = Field(..., description="Email пользователя", example="user@example.com")
+    username: str = Field(..., description="Имя пользователя", example="invalid")
+    email: str = Field(..., description="Email пользователя", example="invalid@example.com")
     is_active: bool = Field(..., description="Статус активности аккаунта", example=True)
 
     class Config:
         from_attributes = True
 
-# Схема ответа при успешной авторизации
 class Token(BaseModel):
     access_token: str = Field(
         ...,
