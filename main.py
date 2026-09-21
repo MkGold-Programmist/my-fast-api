@@ -7,7 +7,20 @@ from typing import List
 import models, schemas, auth
 from database import engine, get_db
 
-# Создаём таблицы в базе данных при старте
+
+origins = [
+    "http://127.0.0.1:5500",
+    "http://localhost:5500",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 models.Base.metadata.create_all(bind=engine)
 
 # Оформление заголовка и описания API в Swagger UI
