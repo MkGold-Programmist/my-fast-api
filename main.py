@@ -7,6 +7,16 @@ from typing import List
 import models, schemas, auth
 from database import engine, get_db
 
+models.Base.metadata.create_all(bind=engine)
+
+# Оформление заголовка и описания API в Swagger UI
+app = FastAPI(
+    title="User Authentication API",
+    description="Полноценный сервис авторизации и регистрации пользователей с использованием JWT-токенов и SQLite.",
+    version="1.0.0",
+    docs_url="/docs",
+    redoc_url="/redoc"
+)
 
 origins = [
     "http://127.0.0.1:5500",
@@ -21,16 +31,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-models.Base.metadata.create_all(bind=engine)
-
-# Оформление заголовка и описания API в Swagger UI
-app = FastAPI(
-    title="User Authentication API",
-    description="Полноценный сервис авторизации и регистрации пользователей с использованием JWT-токенов и SQLite.",
-    version="1.0.0",
-    docs_url="/docs",
-    redoc_url="/redoc"
-)
 
 # Настройка CORS для подключения React/Vite фронтенда
 app.add_middleware(
